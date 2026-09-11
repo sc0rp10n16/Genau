@@ -13,6 +13,10 @@ struct GenauApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
+            CatalogWord.self,
+            Verb.self,
+            Noun.self,
+            ReviewState.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

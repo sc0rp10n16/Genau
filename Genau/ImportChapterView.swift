@@ -127,15 +127,12 @@ struct ImportChapterView: View {
             .trimmingCharacters(in: .whitespaces)
             .lowercased()
         
-        // Search in the catalog
-        let descriptor = FetchDescriptor<CatalogWord>(
-            predicate: #Predicate { word in
-                word.lemma.lowercased() == cleaned
-            }
-        )
+        // Search in the catalog - fetch all and filter in Swift since SwiftData predicates
+        // can't use .lowercased() inside the predicate
+        let descriptor = FetchDescriptor<CatalogWord>()
+        let allWords = (try? context.fetch(descriptor)) ?? []
         
-        let results = try? context.fetch(descriptor)
-        return results?.first
+        return allWords.first { $0.lemma.lowercased() == cleaned }
     }
 }
 

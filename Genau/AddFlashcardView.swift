@@ -39,7 +39,7 @@ struct AddFlashcardView: View {
                 }
 
                 if !search.isEmpty && results.isEmpty {
-                    Text("No matches for "\(search)".")
+                    Text("No matches for \"\(search)\".")
                         .foregroundStyle(.secondary)
                 }
             }
